@@ -26,7 +26,7 @@ import { filter } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FullLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
-
+  perfectScrollbarEnable = '';
   hideSidebar = true;
   overlayContent = false;
   configSub: Subscription;

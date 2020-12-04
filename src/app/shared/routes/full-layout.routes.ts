@@ -7,5 +7,9 @@ export const Full_ROUTES: Routes = [
   {
     path: 'page',
     loadChildren: () => import('../../page/page.module').then(m => m.PageModule)
-  }
+  },
+  {
+    path: 'chat',
+    loadChildren: () => import('../../chat/chat.module').then(m => m.ChatModule)
+  },
 ];

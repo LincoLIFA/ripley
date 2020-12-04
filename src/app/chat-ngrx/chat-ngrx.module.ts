@@ -25,6 +25,9 @@ import { chatReducer } from '../chat-ngrx/store/chat.reducers';
     ],
     declarations: [
         ChatComponent
+    ],
+    exports: [
+        ChatComponent
     ]
 })
 export class ChatNGRXModule { }

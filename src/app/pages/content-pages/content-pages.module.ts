@@ -8,6 +8,7 @@ import { ContentPagesRoutingModule } from './content-pages-routing.module';
 
 import { ErrorPageComponent } from './error/error-page.component';
 import { LoginPageComponent } from './login/login-page.component';
+import { ChatNGRXModule } from 'src/app/chat-ngrx/chat-ngrx.module';
 
 
 
@@ -18,7 +19,7 @@ import { LoginPageComponent } from './login/login-page.component';
         FormsModule ,
         ReactiveFormsModule,
         NgbModule,
-        NgxSpinnerModule
+        NgxSpinnerModule,
     ],
     declarations: [
         ErrorPageComponent,

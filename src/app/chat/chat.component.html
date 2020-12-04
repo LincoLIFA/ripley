@@ -1,0 +1,51 @@
+<div class="chat-application overflow-hidden">
+  <div class="chat-name p-2">
+    <div class="media p-1 align-items-center">
+      <div class="media-body">
+        <img [src]="activeChatUserImg" width="37" class="avatar mr-1" alt="avatar">
+        <span>{{ activeChatUser }}</span>
+      </div>
+    </div>
+  </div>
+  <section class="chat-app-window position-relative" [perfectScrollbar] #scrollMe [scrollTop]="scrollMe.scrollHeight">
+    <div class="chats">
+      <div class="chat" [ngClass]="{'chat-left': chat.isReceived}" *ngFor="let chat of chats">
+        <div class="chat-avatar">
+          <a class="avatar avatar-md" data-toggle="tooltip" data-placement="[activeChatUserImg]" title=""
+            data-original-title="">
+            <img [src]="chat.isReceived ? activeChatUserImg : loggedInUserImg" alt="avatar">
+          </a>
+        </div>
+        <div class="chat-body">
+          <div class="chat-content" *ngFor="let message of chat.messages">
+            <p *ngIf="chat.messageType === 'text'">{{ message }}</p>
+          </div>
+        </div>
+        <p class="time" *ngIf="chat.time !='' "> <span class="badge badge-secondary mb-1">{{chat.time}}</span></p>
+        <div class="chat" *ngIf="messages.length > 0">
+          <div class="chat-avatar">
+            <a class="avatar" data-toggle="tooltip" data-placement="right" title="" data-original-title="">
+              <img src="assets/img/portrait/small/avatar-s-1.png" alt="avatar">
+            </a>
+          </div>
+          <div class="chat-body">
+            <div class="chat-content" *ngFor="let message of messages">
+              <p>{{ message }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="chat-app-form px-3 py-2">
+    <div class="d-flex align-items-center">
+      <input type="text" name="iconLeft4" class="form-control chat-message-send mr-2" id="iconLeft4"
+        placeholder="Type your message here" (keydown.enter)="onAddMessage();$event.preventDefault()"
+        [(ngModel)]="newMessage" #it="ngModel">
+      <button type="button" class="btn btn-primary d-lg-flex align-items-center" (click)="onAddMessage()">
+        <i class="ft-send"></i>
+        <span class="d-none d-lg-block ml-1">Send</span>
+      </button>
+    </div>
+  </section>
+</div>

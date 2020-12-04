@@ -30,6 +30,7 @@ import { WINDOW_PROVIDERS } from './shared/services/window.service';
 import { IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { ChatNGRXModule } from './chat-ngrx/chat-ngrx.module';
+import { ChatModule } from './chat/chat.module';
 
 const firebaseConfig = {
   apiKey: 'YOUR_API_KEY', // YOUR_API_KEY
@@ -64,6 +65,7 @@ export function createTranslateLoader(http: HttpClient) {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     NgbModule,
+    ChatModule,
     NgxSpinnerModule,
     DeviceDetectorModule.forRoot(),
     TranslateModule.forRoot({

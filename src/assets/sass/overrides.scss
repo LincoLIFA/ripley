@@ -39,43 +39,15 @@
   }
 }
 
-// for dark and transparent layouts
-html body.layout-dark {
-  .accordion .card {
-    box-shadow: none;
-  }
-
-  &:not(.layout-transparent) {
-    .accordion .card .card-header {
-      border-color: $dl-border-color;
-    }
-  }
-
-  &.layout-transparent {
-    .accordion .card .card-header {
-      border-color: $tl-border-color;
-
-      button:not([disabled]) {
-        color: map-get($primary-color, lighten-4);
-      }
-    }
-  }
-}
-
-
-
 //------- horizontal timeline -------
 .cd-horizontal-timeline .events-content li {
   transform: translateX(0);
 }
 
-
-
 //------- time picker -------
 .ngb-tp-input-container button:hover {
   box-shadow: none;
 }
-
 
 //------- Chartist Tooltip -------
 .chartist-tooltip:not(.tooltip-show) {
@@ -83,5 +55,47 @@ html body.layout-dark {
 
   &:before {
     border: 0;
+  }
+}
+
+
+// for dark and transparent layouts
+html body.layout-dark {
+
+  // Navbar search
+  .search-list {
+    background: $bg-color-dark;
+
+    .first-active-item .option {
+      background: $dl-bg-color;
+    }
+
+    .option {
+      color: $dl-text-color;
+
+      &:hover {
+        background: $dl-bg-color;
+      }
+    }
+
+    .accordion .card {
+      box-shadow: none;
+    }
+
+    &:not(.layout-transparent) {
+      .accordion .card .card-header {
+        border-color: $dl-border-color;
+      }
+    }
+
+    &.layout-transparent {
+      .accordion .card .card-header {
+        border-color: $tl-border-color;
+
+        button:not([disabled]) {
+          color: map-get($primary-color, lighten-4);
+        }
+      }
+    }
   }
 }
