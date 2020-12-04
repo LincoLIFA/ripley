@@ -14,6 +14,13 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "@mattlewis92/dom-autoscroller",
+              "angular-calendar/date-adapters/date-fns",
+              "prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard",
+              "lodash",
+              "css-element-queries"
+            ],
             "outputPath": "www",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -32,14 +39,16 @@
               }
             ],
             "styles": [
-              {
-                "input": "src/theme/variables.scss"
-              },
-              {
-                "input": "src/global.scss"
-              }
+              "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
+              "node_modules/prismjs/plugins/toolbar/prism-toolbar.css",
+              "src/assets/css/animate.min.css",
+              "src/assets/css/demo.css",
+              "src/assets/sass/core.scss",
+              "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/vendor/pace/pace.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -98,19 +107,17 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "styles": [],
-            "scripts": [],
+            "scripts": [
+              "src/assets/vendor/pace/pace.min.js"
+            ],
+            "styles": [
+              "src/assets/css/demo.css",
+              "src/assets/sass/app.scss",
+              "src/styles.css"
+            ],
             "assets": [
-              {
-                "glob": "favicon.ico",
-                "input": "src/",
-                "output": "/"
-              },
-              {
-                "glob": "**/*",
-                "input": "src/assets",
-                "output": "/assets"
-              }
+              "src/assets",
+              "src/favicon.ico"
             ]
           },
           "configurations": {
@@ -178,7 +185,8 @@
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {
-      "styleext": "scss"
+      "prefix": "app",
+      "style": "scss"
     },
     "@ionic/angular-toolkit:page": {
       "styleext": "scss"
