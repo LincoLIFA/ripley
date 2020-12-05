@@ -56,6 +56,7 @@
     "ngx-custom-validators": "9.1.0",
     "ngx-device-detector": "1.4.0",
     "ngx-perfect-scrollbar": "9.0.0",
+    "ngx-socket-io": "^3.2.0",
     "ngx-spinner": "9.0.2",
     "ngx-take-until-destroy": "5.4.0",
     "ngx-toastr": "^13.2.0",

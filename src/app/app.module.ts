@@ -29,8 +29,10 @@ import { AuthGuard } from './shared/auth/auth-guard.service';
 import { WINDOW_PROVIDERS } from './shared/services/window.service';
 import { IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
-import { ChatNGRXModule } from './chat-ngrx/chat-ngrx.module';
 import { ChatModule } from './chat/chat.module';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { environment } from 'src/environments/environment';
+
 
 const firebaseConfig = {
   apiKey: 'YOUR_API_KEY', // YOUR_API_KEY
@@ -53,6 +55,7 @@ export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
+const config: SocketIoConfig = { url: `${environment.apiUrl}`, options: {} };
 @NgModule({
   declarations: [AppComponent, FullLayoutComponent, ContentLayoutComponent],
   imports: [
@@ -62,6 +65,7 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
+    SocketIoModule.forRoot(config),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     NgbModule,

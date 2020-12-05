@@ -40,11 +40,11 @@
   <section class="chat-app-form px-3 py-2">
     <div class="d-flex align-items-center">
       <input type="text" name="iconLeft4" class="form-control chat-message-send mr-2" id="iconLeft4"
-        placeholder="Type your message here" (keydown.enter)="onAddMessage();$event.preventDefault()"
+        placeholder="Escribe tu mensaje aquí" (keydown.enter)="onAddMessage();$event.preventDefault()"
         [(ngModel)]="newMessage" #it="ngModel">
       <button type="button" class="btn btn-primary d-lg-flex align-items-center" (click)="onAddMessage()">
         <i class="ft-send"></i>
-        <span class="d-none d-lg-block ml-1">Send</span>
+        <span class="d-none d-lg-block ml-1">Envíar</span>
       </button>
     </div>
   </section>

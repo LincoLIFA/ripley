@@ -18,7 +18,7 @@ import { ChatComponent } from './chat.component';
         NgbModule,
         FormsModule,
         PerfectScrollbarModule,
-        PipeModule
+        PipeModule,
     ],
     declarations: [
         ChatComponent

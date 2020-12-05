@@ -4,11 +4,12 @@ import { Chat, UsersChat } from './chat.model';
 import { DOCUMENT } from '@angular/common';
 import { ConfigService } from '../shared/services/config.service';
 import { Subscription } from 'rxjs';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
   styleUrls: ['./chat.component.scss'],
   providers: [ChatService]
 })
@@ -25,14 +26,16 @@ export class ChatComponent implements OnInit, OnDestroy {
   placement = 'bottom-right';
   isContentOverlay = false;
 
-
   public config: any = {};
   layoutSub: Subscription;
 
-
   messages = new Array();
+  message = '';
+  currentUser = '';
   item = 0;
-  constructor(private elRef: ElementRef, private renderer: Renderer2,
+
+  constructor(public socket: Socket,
+              private renderer: Renderer2,
               @Inject(DOCUMENT) private document: Document,
               private configService: ConfigService, private cdr: ChangeDetectorRef,
               private chatService: ChatService) {
@@ -46,8 +49,23 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.renderer.addClass(this.document.body, 'chat-application');
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.socket.connect();
+
+    const name = `user-${new Date().getTime()}`;
+    this.currentUser = name;
+    this.socket.emit('set-name', name);
+    this.chatService.listen('listen-message').subscribe((data: any) => {
+      const momento = new Date(data.createdAt).toLocaleString();
+      this.chats.push({
+        isReceived: true,
+        time: '',
+        messages: [data.message],
+        messageType: 'text'
+      });
+    });
   }
+
 
   ngOnDestroy() {
 
@@ -56,29 +74,23 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
 
     this.renderer.removeClass(this.document.body, 'chat-application');
+    this.socket.disconnect();
   }
-
-
-
 
   // send button function calls
   onAddMessage() {
     if (this.newMessage !== '') {
-      this.activeChat.chats.push({
-        isReceived: false,
-        time: '',
-        messages: [this.newMessage],
-        messageType: 'text'
-      });
+      this.chatService.emit('send-message', this.newMessage);
       this.newMessage = '';
     }
   }
 
   viewChat(chat: UsersChat) {
 
+    // tslint:disable-next-line: no-shadowed-variable
     this.usersChat.forEach(chat => {
       if (chat.userId === this.activeChat.userId) {
-        chat.isActiveChat = false;
+        chat.isActiveChat = true;
       }
     });
 
@@ -89,14 +101,4 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.activeChatUserImg = this.activeChat.avatar;
     this.isContentOverlay = false;
   }
-
-
-  onSidebarToggle() {
-    this.isContentOverlay = true;
-  }
-
-  onContentOverlay() {
-    this.isContentOverlay = false;
-  }
-
 }
